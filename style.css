@@ -1,0 +1,279 @@
+:root {
+      --bg: #0b1220;
+      --panel: #0f1724;
+      --accent: #00d4ff;
+      --face-light: #f7f7f9;
+      --muted: rgba(255, 255, 255, 0.65);
+      --radius-vmin: 40vmin;
+      --transition: 220ms cubic-bezier(.2, .9, .2, 1);
+      --font-scale: 1;
+      --contrast: 1;
+    }
+
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      background: var(--bg);
+      color: var(--face-light);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .wrap {
+      width: min(720px, calc(var(--radius-vmin) * 2));
+      max-width: 94vw;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: transform var(--transition);
+    }
+
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      border-radius: 12px;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(0, 0, 0, 0.02));
+      transition: box-shadow var(--transition), transform var(--transition);
+      filter: contrast(var(--contrast));
+    }
+
+    .controls {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      z-index: 12;
+    }
+
+    .btn {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--face-light);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 6px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: background var(--transition), transform 120ms;
+      opacity: 0.9;
+    }
+
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .btn:focus {
+      outline: 2px solid rgba(0, 212, 255, 0.12);
+      outline-offset: 3px;
+    }
+
+    .controls {
+      opacity: 0;
+      transform: translateY(-6px);
+      pointer-events: none;
+      transition: opacity 180ms, transform 180ms;
+    }
+
+    .wrap:hover .controls,
+    .wrap:focus-within .controls {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .config {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      width: 260px;
+      max-width: 46vw;
+      background: rgba(0, 0, 0, 0.28);
+      border-radius: 10px;
+      padding: 10px;
+      color: var(--face-light);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      transform-origin: left top;
+      transition: transform var(--transition), opacity var(--transition);
+      opacity: 0;
+      transform: scale(0.96);
+      pointer-events: none;
+      z-index: 12;
+    }
+
+    .config.open {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
+    }
+
+    .config h3 {
+      margin: 0 0 8px 0;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-color: rgba(15, 23, 36, 0.98);
+      color: var(--face-light);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 6px 10px;
+      padding-right: 36px;
+
+      border-radius: 6px;
+      font-size: 13px;
+      line-height: 1.2;
+      background-image:
+        linear-gradient(45deg, transparent 50%, var(--face-light) 50%),
+        linear-gradient(135deg, var(--face-light) 50%, transparent 50%),
+        linear-gradient(to right, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.02));
+      background-position:
+        calc(100% - 18px) calc(50% - 6px),
+        calc(100% - 13px) calc(50% - 6px),
+        calc(100% - 2.5em) 0.5em;
+      background-size: 6px 6px, 6px 6px, 1px 1.5em;
+      background-repeat: no-repeat;
+      transition: box-shadow 160ms, border-color 160ms;
+    }
+
+    select option {
+      color: var(--face-light);
+      background-color: rgba(11, 18, 32, 0.98);
+    }
+
+    select:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.06);
+      border-color: rgba(0, 212, 255, 0.18);
+    }
+
+    select:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    select {
+      box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.02);
+    }
+
+    .row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    label {
+      font-size: 13px;
+      color: var(--muted);
+      min-width: 90px;
+    }
+
+    input[type="range"] {
+      width: 120px;
+    }
+
+    select,
+    input[type="number"],
+    input[type="color"] {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--face-light);
+      padding: 6px;
+      border-radius: 6px;
+    }
+
+    .tooltip {
+      position: fixed;
+      pointer-events: none;
+      background: rgba(0, 0, 0, 0.7);
+      color: #fff;
+      padding: 6px 8px;
+      border-radius: 6px;
+      font-size: 13px;
+      transform: translate(-50%, -120%);
+      white-space: nowrap;
+      z-index: 40;
+      opacity: 0;
+      transition: opacity 160ms;
+    }
+
+    .tooltip.visible {
+      opacity: 1;
+    }
+
+    .time-label {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      color: var(--muted);
+      font-size: 13px;
+      background: rgba(0, 0, 0, 0.14);
+      padding: 6px 8px;
+      border-radius: 8px;
+      backdrop-filter: blur(6px);
+      z-index: 11;
+    }
+
+    .pulse {
+      animation: pulseCap 420ms ease-out;
+    }
+
+    @keyframes pulseCap {
+      0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(0, 212, 255, 0.0);
+      }
+
+      40% {
+        transform: scale(1.18);
+        box-shadow: 0 0 18px rgba(0, 212, 255, 0.18);
+      }
+
+      100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(0, 212, 255, 0.0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      :root {
+        --transition: 0ms;
+      }
+
+      .pulse {
+        animation: none;
+      }
+    }
+
+    @media (max-width:520px) {
+      .config {
+        left: 8px;
+        top: 8px;
+        width: 220px;
+      }
+
+      .controls {
+        right: 8px;
+        top: 8px;
+      }
+
+      .time-label {
+        left: 8px;
+        bottom: 8px;
+        font-size: 12px;
+        padding: 5px 7px;
+      }
+    }

@@ -1,0 +1,78 @@
+<html>
+
+<head>
+  <title>Clock</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="wrap" id="wrap" role="application" aria-label="Analog clock with controls" tabindex="0">
+
+    <div class="controls" role="toolbar" aria-label="Clock actions">
+      <button class="btn" id="snapBtn" title="Save snapshot (S)" aria-label="Save snapshot">📸</button>
+      <button class="btn" id="shareBtn" title="Share snapshot" aria-label="Share snapshot">🔗</button>
+      <button class="btn" id="configToggle" aria-expanded="false" title="Open settings"
+        aria-label="Open settings">⚙️</button>
+    </div>
+
+
+    <div class="config" id="config" aria-hidden="true">
+      <h3>Settings</h3>
+
+      <div class="row">
+        <label for="tzSelect">Timezone</label>
+        <select id="tzSelect" aria-label="Select timezone">
+
+          <option value="local">Local</option>
+          <option value="UTC">UTC</option>
+          <option value="Asia/Colombo">Asia/Colombo</option>
+          <option value="Asia/Kolkata">Asia/Kolkata</option>
+          <option value="Europe/London">Europe/London</option>
+          <option value="America/New_York">America/New_York</option>
+          <option value="Asia/Tokyo">Asia/Tokyo</option>
+        </select>
+      </div>
+
+      <div class="row">
+        <label for="fontScale">Font scale</label>
+        <input id="fontScale" type="range" min="0.8" max="1.6" step="0.05" value="1" aria-label="Font scale">
+      </div>
+
+      <div class="row">
+        <label for="contrast">Contrast</label>
+        <input id="contrast" type="range" min="0.7" max="1.4" step="0.05" value="1" aria-label="Contrast">
+      </div>
+
+      <div class="row">
+        <label for="showNumerals">Numerals</label>
+        <select id="showNumerals" aria-label="Show numerals">
+          <option value="true">Show</option>
+          <option value="false">Hide</option>
+        </select>
+      </div>
+
+      <div class="row">
+        <label for="tickDensity">Tick density</label>
+        <select id="tickDensity" aria-label="Tick density">
+          <option value="60">60 (default)</option>
+          <option value="30">30</option>
+          <option value="12">12</option>
+        </select>
+      </div>
+
+      <div class="row" style="justify-content:flex-end;">
+        <button class="btn" id="closeConfig">Close</button>
+      </div>
+    </div>
+
+    <canvas id="clock" width="600" height="600" aria-hidden="true"></canvas>
+
+    <div class="time-label" id="timeLabel" aria-live="polite">--:--:--</div>
+
+    <div class="tooltip" id="tooltip" role="status" aria-hidden="true"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
